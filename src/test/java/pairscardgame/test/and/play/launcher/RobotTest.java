@@ -31,14 +31,14 @@ public class RobotTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testEasy() throws Exception {
 		GamePlayer gamePlayer = new GamePlayer();
 		gamePlayer.startGameAndRobot("Easy");
 		assertTrue(screen.exists(levelScreen("Winner")));
 	}
 
-	@Test
+	//@Test
 	public void testMedium() throws Exception {
 		GamePlayer gamePlayer = new GamePlayer();
 		gamePlayer.startGameAndRobot("Medium");
@@ -49,6 +49,13 @@ public class RobotTest {
 	public void testHard() throws Exception {
 		GamePlayer gamePlayer = new GamePlayer();
 		gamePlayer.startGameAndRobot("Hard");
+		assertTrue(screen.exists(levelScreen("Winner")));
+	}
+	
+	//@Test
+	public void deckOnline() throws Exception {
+		GamePlayer gamePlayer = new GamePlayer();
+		gamePlayer.startGameAndRobot(null, "DeckOnline");
 		assertTrue(screen.exists(levelScreen("Winner")));
 	}
 

@@ -35,6 +35,7 @@ public class GameHandlerTest {
 
 	@Test
 	public void testLevelButtonsAndSidiLogo() {
+		
 		boolean exists = screen.exists(initialScreen("Easy")) 
 				&& screen.exists(initialScreen("Medium"))
 				&& screen.exists(initialScreen("Hard"))
@@ -45,6 +46,7 @@ public class GameHandlerTest {
 
 	@Test
 	public void testEasyLevel() throws Exception {
+		
 		screen.click(initialScreen("Easy"));
 		screen.waitAndClick(levelScreen("SidiDeck"), 2);
 		screen.delay();
@@ -57,6 +59,7 @@ public class GameHandlerTest {
 	
 	@Test
 	public void testMediumLevel() throws Exception {
+		
 		screen.click(initialScreen("Medium"));
 		screen.waitAndClick(levelScreen("SidiDeck"), 2);
 		screen.delay();

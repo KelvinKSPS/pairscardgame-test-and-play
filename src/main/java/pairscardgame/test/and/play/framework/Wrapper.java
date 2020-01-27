@@ -42,47 +42,15 @@ public class Wrapper extends Screen {
 		screen = new Screen().getScreen();
 	}
 
-	public void waitForImage(Image image, int timeout) throws Exception {
-
-		Match state = null;
-
-		while (true) {
-			state = screen.exists(image.getPattern(), timeout);
-			if (state == null) {
-				if (timeout > 0) {
-					Thread.sleep(1000);
-					timeout--;
-					continue;
-				} else {
-					throw new NotFoundException("Image" + image.getPattern().toString() + " not found");
-				}
-			} else {
-				break;
-			}
-		}
+	public void waitForImage(Image image, int timeout) {
+		this.waitVanish(image.getPattern(), timeout);
 	}
-
+	
 	public void waitAndClick(Image image, int timeout) throws Exception {
 
-		Match state = null;
-
-		while (true) {
-
-			state = screen.exists(image.getPattern(), timeout);
-			if (state == null) {
-
-				if (timeout > 0) {
-					this.delay();
-					timeout--;
-					continue;
-				} else {
-					throw new NotFoundException("Image" + image.getPattern().toString() + " not found");
-				}
-			} else {
-				this.click(image.getPattern());
-				break;
-			}
-		}
+		this.waitVanish(image.getPattern(), timeout);
+		this.click(image.getPattern());
+	
 	}
 
 	public void delay() {

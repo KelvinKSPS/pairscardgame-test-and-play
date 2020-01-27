@@ -26,6 +26,8 @@ import pairscardgame.test.and.play.framework.Wrapper;
 
 public class GamePlayer {
 	private Wrapper screen = new Wrapper();
+	private double timeout = 0.4;
+	private double flipTimeout = timeout * 2;
 
 	public GamePlayer() {
 		super();
@@ -36,10 +38,18 @@ public class GamePlayer {
 		this.selectLevel(level);
 		this.startRobot();
 	}
-
+	
+	public void startGameAndRobot(String level, String deckName) throws Exception {
+		this.startRobot(deckName);
+	}
+	
 	private void startRobot() throws FindFailed {
+		startRobot("SidiDeckComplete");
+	}
 
-		Iterator<Match> regions = screen.findAll(levelScreen("SidiDeckComplete"));
+	private void startRobot(String deckName) throws FindFailed {
+
+		Iterator<Match> regions = screen.findAll(levelScreen(deckName));
 		List<Card> allCards = new ArrayList<>();
 		
 		
@@ -58,7 +68,7 @@ public class GamePlayer {
 			Card firstCard = allCardsToIterator.next();
 			
 			firstCard.getMatch().click();
-			screen.delay(1);
+			screen.delay(flipTimeout);
 			
 			Region currentRegion = firstCard.getMatch();
 			setupRegionToMemory(firstCard, currentRegion);
@@ -69,7 +79,7 @@ public class GamePlayer {
 						
 			Card secondCard = allCardsToIterator.next();
 			secondCard.getMatch().click();
-			screen.delay(0.5);
+			screen.delay(flipTimeout);
 			
 			currentRegion = secondCard.getMatch();
 			setupRegionToMemory(secondCard, currentRegion);
@@ -82,6 +92,7 @@ public class GamePlayer {
 			
 			if(compareRegionToMemory(allCards, secondCard, similarity)) {
 				secondCard.getMatch().click();
+				screen.delay(timeout);
 				continue;
 			}
 
@@ -103,7 +114,7 @@ public class GamePlayer {
 			if(card.isFound() && card.getIntId()!=currentCard.getIntId()) {
 				if(screen.getDifferencePercent(currentCard.getImage(),card.getImage()) < similarity) {
 					card.getMatch().click();
-					screen.delay(0.5);
+					screen.delay(timeout);
 					allCards.remove(currentCard);
 					allCards.remove(card);
 					found = true;
@@ -120,7 +131,7 @@ public class GamePlayer {
 	private void selectLevel(String level) throws Exception {
 		screen.click(initialScreen(level));
 		screen.waitAndClick(levelScreen("SidiDeck"), 2);
-		screen.delay(0.5);
+		screen.delay(timeout);
 	}
 
 	private void start() throws Exception {

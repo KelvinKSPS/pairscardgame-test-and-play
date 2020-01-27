@@ -1,9 +1,6 @@
 package pairscardgame.test.and.play.framework;
 
 public class Files {
-	/*
-	 * starting => GERP opening, environment selection and logging
-	 */
 
 	public static Image initialScreen(String file) {
 		return new Image("initial-screen", file);
