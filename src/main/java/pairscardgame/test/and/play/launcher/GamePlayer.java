@@ -58,6 +58,7 @@ public class GamePlayer {
 			Card card = new Card(match);
 			allCards.add(card);
 		}
+		
 		Iterator<Card> allCardsToIterator = new ArrayList<Card>(allCards).iterator();
 		
 		
@@ -93,7 +94,6 @@ public class GamePlayer {
 			if(compareRegionToMemory(allCards, secondCard, similarity)) {
 				secondCard.getMatch().click();
 				screen.delay(timeout);
-				continue;
 			}
 
 		}

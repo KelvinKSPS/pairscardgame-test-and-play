@@ -42,8 +42,8 @@ public class Wrapper extends Screen {
 		screen = new Screen().getScreen();
 	}
 
-	public void waitForImage(Image image, int timeout) {
-		this.waitVanish(image.getPattern(), timeout);
+	public void waitForImage(Image image, int timeout) throws FindFailed {
+		this.wait(image.getPattern(), timeout);
 	}
 	
 	public void waitAndClick(Image image, int timeout) throws Exception {
